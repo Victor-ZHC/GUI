@@ -1,0 +1,124 @@
+/*左边*/
+/*图片*/
+.img_padding {
+	padding: 3px;
+}
+
+/*智能生产控制MES*/
+.duty_on {
+	font-size: 22px;
+}
+
+.duty_off {
+	font-size: 15px;
+	color: #99a8f7;
+}
+
+/*右边*/
+/*智能排程APS*/
+.arrow {
+	font-size: 10px;
+	margin-left: 15px;
+}
+
+/*质检*/
+.right_border_dashed {
+	border-right:1px dashed #fff;
+}
+
+.quality_test_info, .schedule_info {
+	font-size: 35px;
+	font-weight: bold;
+}
+
+/*问题栈点*/
+.problem_stack {
+	border: 1px solid #fff;
+	border-radius: 15px;  
+	width:90px;
+	height: 90px;
+	margin-right: 10px;
+}
+
+/*智能排程APS*/
+.semi_circle_up {
+   width: 100px;
+   height: 50px;
+   border-radius: 50px 50px 0 0;
+   background: transparent;
+   border: 2px solid #fff;
+   border-bottom: none;
+   text-align: center;
+   padding-top: 15px;
+   font-size: 20px;
+}
+
+.semi_circle_down {
+   width: 100px;
+   height: 50px;
+   border-radius: 0 0 50px 50px;
+   background: #8ab2ec;
+   border: 2px solid #fff;
+   border-top: none;
+   text-align: center;
+   padding-top: 5px;
+   font-size: 15px;
+}
+
+.schedule_top {
+	margin-top: 40px;
+}
+
+.schedule_info_error {
+	font-size: 45px;
+	font-weight: bold;
+	color: #ff5400;
+}
+
+.schedule_bar {
+	color: black;
+	padding-left: 10px;
+	font-weight: bold;
+}
+
+.schedule_a {
+	width: 50%;
+}
+
+.schedule_b {
+	width: 80%;
+}
+
+.schedule_c {
+	width: 63%;
+}
+
+.schedule_d {
+	width: 40%;
+}
+
+.schedule_e {
+	width: 28%;
+}
+
+.schedule_f {
+	width: 10%;
+}
+
+/*供应链*/
+.supply_chain_info {
+	font-size: 25px;
+}
+
+.supply_chain_f {
+	font-size: 38px;
+	font-weight: bold;
+}
+
+.supply_chain_s {
+	font-size: 30px;
+}
+
+.no_padding {
+	padding: 0;
+}

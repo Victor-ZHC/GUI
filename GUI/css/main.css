@@ -1,0 +1,9 @@
+body {
+	background-color: rgb(16,30,64);
+	font-family: Microsoft YaHei;
+}
+div {color: white;}
+
+.main_container {
+	margin: 30px 8% 5% 8%;
+}

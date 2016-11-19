@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Screen2</title>
+    <script src="../js/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/screen2.css">
+  </head>
+  <body>
+    <div ng-app="myApp" ng-controller="screen2Ctrl" class="main_container">
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="title_center">银川滨河如意</h5>
+            <h1 class="title_center">智能数据运营中心</h1>
+          </div>
+          <div class="col-md-12 pinki">
+            <div class="col-md-2">
+	            <span class="pinki_brand">Pinki</span>
+	        </div>
+	        <div class="col-md-2 pink_top">
+	            <span class="pink_title">品依科技</span>
+	            <span class="glyphicon glyphicon-play pink_arrow"></span>
+            </div>
+            <div class="col-md-8 pink_top">
+            	<span class="pinki_info">拥堵节点:自动裁床 拥堵原因: 整改措施: 责任人: 预计恢复时间:</span>
+            </div>
+          </div>
+          <div class="col-md-3 right_border_dashed">
+            <h2>智能吊挂系统<span class="glyphicon glyphicon-play arrow"></span></h2>
+            <div class="col-md-4 right_border">
+              <span class="productLine_on">{{productLine()[0].split('/')[0]}}</span>
+              <span class="productLine_off">/{{productLine()[0].split('/')[0]}}</span>
+              <br/>
+              <span>产线A</span>
+            </div>
+            <div class="col-md-4 right_border">
+              <span class="productLine_on">{{productLine()[1].split('/')[0]}}</span>
+              <span class="productLine_off">/{{productLine()[1].split('/')[0]}}</span>
+              <br/>
+              <span>产线B</span>
+            </div>
+            <div class="col-md-4">
+              <span class="productLine_on">{{productLine()[2].split('/')[0]}}</span>
+              <span class="productLine_off">/{{productLine()[2].split('/')[0]}}</span>
+              <br/>
+              <span>产线C</span>
+            </div>
+            <div class="col-md-12 workstation_top">
+              <span class="workstation">工作站暂压: </span><span class="workstation_num">{{workStation()[0]}}</span>
+            </div>
+            <div class="col-md-12">
+              <span class="workstation">配对工作站时间效率: </span><span class="workstation_num">{{workStation()[1]}}s</span>
+            </div>
+            <div class="col-md-12">
+              <span class="workstation">暂压的裁片数量: </span><span class="workstation_num">{{workStation()[2]}}</span>
+            </div>
+            <div class="col-md-12">
+              <span class="workstation">服装配对事件: </span><span class="workstation_num">{{workStation()[3]}}s</span>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <h2>自动裁床<span class="glyphicon glyphicon-play arrow"></span></h2>
+            <div class="col-md-4 right_border">
+              <span class="brand_on">{{brand()[0].split('/')[0]}}</span>
+              <span class="brand_off">/{{brand()[0].split('/')[1]}}</span>
+              <br/>
+              <span>品牌A</span>
+            </div>
+            <div class="col-md-4">
+              <span class="brand_on">{{brand()[1].split('/')[0]}}</span>
+              <span class="brand_off">/{{brand()[1].split('/')[1]}}</span>
+              <br/>
+              <span>品牌B</span>
+            </div>
+            <div class="col-md-12 tailor_top">
+              <span class="tailor">有效工作时间: </span><span class="tailor_num">{{tailor()[0]}}</span>
+            </div>
+            <div class="col-md-12">
+              <span class="tailor">刀头的移动时间: </span><span class="tailor_num">{{tailor()[1]}} %</span>
+            </div>
+            <div class="col-md-12">
+              <span class="tailor">平均裁剪数量: </span><span class="tailor_num">{{tailor()[2]}}</span>
+            </div>
+          </div>
+          <div class="col-md-3 right_border_dashed">
+            <h2>AVG小车<span class="glyphicon glyphicon-play arrow"></span></h2>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>当前站</th>
+                  <th>停留</th>
+                  <th>运送面料</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>小车A</td>
+                  <td>{{avgCar()[0][0]}}</td>
+                  <td>{{avgCar()[0][1]}}''</td>
+                  <td>#{{avgCar()[0][2]}}</td>
+                </tr>
+                <tr>
+                  <td>小车B</td>
+                  <td>{{avgCar()[1][0]}}</td>
+                  <td>{{avgCar()[1][1]}}''</td>
+                  <td>#{{avgCar()[1][2]}}</td>
+                </tr>
+                <tr>
+                  <td>小车C</td>
+                  <td>{{avgCar()[2][0]}}</td>
+                  <td>{{avgCar()[2][1]}}''</td>
+                  <td>#{{avgCar()[2][2]}}</td>
+                </tr>
+                <tr>
+                  <td>小车D</td>
+                  <td>{{avgCar()[3][0]}}</td>
+                  <td>{{avgCar()[3][1]}}''</td>
+                  <td>#{{avgCar()[3][2]}}</td>
+                </tr>
+                <tr>
+                  <td>小车E</td>
+                  <td>{{avgCar()[4][0]}}</td>
+                  <td>{{avgCar()[4][1]}}''</td>
+                  <td>#{{avgCar()[4][2]}}</td>
+                </tr>
+                <tr>
+                  <td>小车F</td>
+                  <td>{{avgCar()[5][0]}}</td>
+                  <td>{{avgCar()[5][1]}}''</td>
+                  <td>#{{avgCar()[5][2]}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-3">
+            <h2>其他设备</h2>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>开机率</th>
+                  <th>设备运行状态</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>缝纫机</td>
+                  <td>
+                    <span class="other_device_on">{{otherDevice()[0].split('/')[0]}}</span>
+                    <span class="other_device_off">/{{otherDevice()[0].split('/')[1]}}</span>
+                  </td>
+                  <td>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>熨烫</td>
+                  <td>
+                    <span class="other_device_on">{{otherDevice()[1].split('/')[0]}}</span>
+                    <span class="other_device_off">/{{otherDevice()[1].split('/')[1]}}</span>
+                  </td>
+                  <td>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>熨烫</td>
+                  <td>
+                    <span class="other_device_on">{{otherDevice()[2].split('/')[0]}}</span>
+                    <span class="other_device_off">/{{otherDevice()[2].split('/')[1]}}</span>
+                  </td>
+                  <td>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>熨烫</td>
+                  <td>
+                    <span class="other_device_on">{{otherDevice()[3].split('/')[0]}}</span>
+                    <span class="other_device_off">/{{otherDevice()[3].split('/')[1]}}</span>
+                  </td>
+                  <td>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>熨烫</td>
+                  <td>
+                    <span class="other_device_on">{{otherDevice()[4].split('/')[0]}}</span>
+                    <span class="other_device_off">/{{otherDevice()[4].split('/')[1]}}</span>
+                  </td>
+                  <td>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>熨烫</td>
+                  <td>
+                    <span class="other_device_on">{{otherDevice()[5].split('/')[0]}}</span>
+                    <span class="other_device_off">/{{otherDevice()[5].split('/')[1]}}</span>
+                  </td>
+                  <td>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-12 title_center">
+          	<span class="pinki_brand">Pinki</span>
+	        <span class="pink_title">品依科技 成就智慧如意</span>
+          </div>
+        </div>
+
+    <script src="../js/screen2.js"></script>
+  </body>
+</html>

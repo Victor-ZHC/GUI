@@ -1,0 +1,90 @@
+/*生产车间实况*/
+.title_center {
+	text-align: center;
+}
+
+/*品依科技*/
+.pinki {
+	margin-top: 35px;
+	background:-webkit-gradient(linear, 0% 0%, 100% 0%,from(rgb(16,30,64)), to(#020f2b));
+}
+
+.pinki_brand {
+	font-family: STXingkai;
+	font-size: 45px;
+	margin-left: 30px;
+	margin-right: 30px;
+    color: green;
+    background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(0, 128, 0, 1)), to(rgba(51, 51, 51, 1)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.pink_top {
+	padding-top: 18px;
+}
+
+.pink_title {
+	font-size: 20px;
+}
+
+.pink_arrow {
+	font-size: 15px;
+	margin-left: 10px;
+}
+
+.pinki_info {
+	font-size: 20px;
+	color: #ff8300;
+}
+
+/*智能吊挂系统 自动裁床 AVG小车 其他设备*/
+.arrow {
+	font-size: 10px;
+	margin-left: 15px;
+}
+
+.productLine_on, .brand_on {
+	font-size: 30px;
+}
+
+.productLine_off, .brand_off {
+	font-size: 20px;
+	color: #99a8f7;
+}
+
+.right_border_dashed {
+	border-right:1px dashed #fff;
+}
+
+.right_border {
+	border-right:1px solid #fff; 
+}
+
+.workstation_top, .tailor_top {
+	margin-top: 20px;
+}
+
+.workstation, .tailor {
+	font-size: 15px;
+}
+
+.workstation_num, .tailor_num {
+	font-size: 25px;
+}
+
+.other_device_on {
+	font-size: 14px;
+}
+
+.other_device_off {
+	font-size: 11px;
+	color: #99a8f7;
+}
+
+.other_device_state {
+	color: #7bd27b;
+	margin-left: 3px;
+	font-weight: bold;
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Screen3</title>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/screen3.css">
+  </head>
+  <body>
+     <div ng-app="myApp" ng-controller="screen3Ctrl" class="main_container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-6 img_padding">
+              <img src="../img/img1.jpg"  alt="img1" width="100%" height="200px"/>
+            </div>
+            <div class="col-md-6 img_padding">
+              <img src="../img/img2.jpg"  alt="img2" width="100%" height="200px"/>
+            </div>
+            <div class="col-md-6 img_padding">
+              <img src="../img/img3.jpg"  alt="img3" width="100%" height="200px"/>
+            </div>
+            <div class="col-md-6 img_padding">
+              <img src="../img/img4.jpg"  alt="img4" width="100%" height="200px"/>
+            </div>
+            <div class="col-md-12">
+              <h2>智能生产控制MES</h2>
+            </div>
+            <div class="col-md-12">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>车间A</th>
+                    <th>车间B</th>
+                    <th>车间C</th>
+                    <th>车间D</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>出勤</td>
+                    <td>
+                      <span class="duty_on">{{produceControl()[0][0].split('/')[0]}}</span>
+                      <span class="duty_off">/{{produceControl()[0][0].split('/')[1]}}</span>
+                    </td>
+                    <td>
+                      <span class="duty_on">{{produceControl()[0][1].split('/')[0]}}</span>
+                      <span class="duty_off">/{{produceControl()[0][1].split('/')[1]}}</span>
+                    </td>
+                    <td>
+                      <span class="duty_on">{{produceControl()[0][2].split('/')[0]}}</span>
+                      <span class="duty_off">/{{produceControl()[0][2].split('/')[1]}}</span>
+                    </td>
+                    <td>
+                      <span class="duty_on">{{produceControl()[0][3].split('/')[0]}}</span>
+                      <span class="duty_off">/{{produceControl()[0][3].split('/')[1]}}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>日产量</td>
+                    <td>{{produceControl()[1][0]}}</td>
+                    <td>{{produceControl()[1][1]}}</td>
+                    <td>{{produceControl()[1][2]}}</td>
+                    <td>{{produceControl()[1][3]}}</td>
+                  </tr>
+                  <tr>
+                    <td>返工率</td>
+                    <td>{{produceControl()[2][0]}}%</td>
+                    <td>{{produceControl()[2][1]}}%</td>
+                    <td>{{produceControl()[2][2]}}%</td>
+                    <td>{{produceControl()[2][3]}}%</td>
+                  </tr>
+                  <tr>
+                    <td>人均产量</td>
+                    <td>{{produceControl()[3][0]}}</td>
+                    <td>{{produceControl()[3][1]}}</td>
+                    <td>{{produceControl()[3][2]}}</td>
+                    <td>{{produceControl()[3][3]}}</td>
+                  </tr>
+                  <tr>
+                    <td>平均工时</td>
+                    <td>{{produceControl()[4][0]}}</td>
+                    <td>{{produceControl()[4][1]}}</td>
+                    <td>{{produceControl()[4][2]}}</td>
+                    <td>{{produceControl()[4][3]}}</td>
+                  </tr>
+                  <tr>
+                    <td>实时工时</td>
+                    <td>{{produceControl()[5][0]}}</td>
+                    <td>{{produceControl()[5][1]}}</td>
+                    <td>{{produceControl()[5][2]}}</td>
+                    <td>{{produceControl()[5][3]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-12">
+              <h2>质检</h2>
+              <div class="col-md-4 right_border_dashed">
+                <h3>一次检验合格率</h3>
+                <span class="quality_test_info">{{qualityTest()[0]}}%</span>
+                <h3>返修合格率</h3>
+                <span class="quality_test_info">{{qualityTest()[1]}}%</span>
+              </div>
+              <div class="col-md-8">
+                <h3>不合格原因分析</h3>
+                <div id="reasonAnalyze" style="width: 100%;height:200px;"></div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <h2>问题栈点</h2>
+              <div class="col-md-2 problem_stack"></div>
+              <div class="col-md-2 problem_stack"></div>
+              <div class="col-md-2 problem_stack"></div>
+              <div class="col-md-2 problem_stack"></div>
+              <div class="col-md-2 problem_stack"></div>
+              <div class="col-md-2 problem_stack"></div>
+            </div>
+            </div>
+            <div class="col-md-6">
+              <h2>智能排程APS<span class="glyphicon glyphicon-play arrow"></span></h2>
+              <div class="col-md-12">
+                <div class="col-md-2">
+                  <div class="col-md-12 semi_circle_up"><span>{{schedule()[0].split('/')[0]}}</span></div>
+                  <div class="col-md-12 semi_circle_down"><span>{{schedule()[0].split('/')[1]}}</span></div>
+                </div>
+                <div class="col-md-2">
+                  <div class="col-md-12 semi_circle_up"><span>{{schedule()[1].split('/')[0]}}</span></div>
+                  <div class="col-md-12 semi_circle_down"><span>{{schedule()[1].split('/')[1]}}</span></div>
+                </div>
+                <div class="col-md-2">
+                  <div class="col-md-12 semi_circle_up"><span>{{schedule()[2].split('/')[0]}}</span></div>
+                  <div class="col-md-12 semi_circle_down"><span>{{schedule()[2].split('/')[1]}}</span></div>
+                </div>
+                <div class="col-md-2">
+                 <div class="col-md-12 semi_circle_up"><span>{{schedule()[3].split('/')[0]}}</span></div>
+                 <div class="col-md-12 semi_circle_down"><span>{{schedule()[3].split('/')[1]}}</span></div>
+                </div>
+                <div class="col-md-2">
+                  <div class="col-md-12 semi_circle_up"><span>{{schedule()[4].split('/')[0]}}</span></div>
+                  <div class="col-md-12 semi_circle_down"><span>{{schedule()[4].split('/')[1]}}</span></div>
+                </div>
+              </div>
+              <div class="col-md-12 schedule_top">
+                <div class="col-md-3 right_border_dashed">
+                  <h3>排产成功率</h3>
+                  <span class="schedule_info">{{scheduleInfo()[0]}}%</span>
+                  <h3>冲突率</h3>
+                  <span class="schedule_info">{{scheduleInfo()[1]}}%</span>
+                </div>
+                <div class="col-md-3">
+                  <h3>排产失败</h3>
+                  <span class="schedule_info_error">{{scheduleInfo()[2]}}</span>
+                </div>
+                <div class="col-md-6">
+                  <div class="progress schedule_a"><span class="schedule_bar">A</span></div>
+                  <div class="progress schedule_b"><span class="schedule_bar">B</span></div>
+                  <div class="progress schedule_c"><span class="schedule_bar">C</span></div>
+                  <div class="progress schedule_d"><span class="schedule_bar">D</span></div>
+                  <div class="progress schedule_e"><span class="schedule_bar">E</span></div>
+                  <div class="progress schedule_f"><span class="schedule_bar">F</span></div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <h2>供应链</h2>
+                <div class="col-md-3">
+                  <h3>今日订单</h3>
+                </div>
+                <div class="col-md-3 no_padding">
+                  <span class="supply_chain_info">面料:</span>
+                  <span class="supply_chain_f">{{supplyChain()[0]}}</span>
+                </div>
+                <div class="col-md-3 no_padding">
+                  <span class="supply_chain_info">辅料:</span>
+                  <span class="supply_chain_f">{{supplyChain()[1]}}</span>
+                </div>
+                <div class="col-md-3 no_padding">
+                  <span class="supply_chain_info">配件:</span>
+                  <span class="supply_chain_f">{{supplyChain()[2]}}</span>
+                </div>
+                <div class="col-md-12">
+                  <div class="col-md-6 no_padding">
+                    <span class="supply_chain_info">供货进度:</span>
+                    <span class="supply_chain_s">{{supplyChain()[3]}}%</span>
+                  </div>
+                  <div class="col-md-6 no_padding">
+                    <span class="supply_chain_info">供货及时率:</span>
+                    <span class="supply_chain_s">{{supplyChain()[4]}}%</span>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <h3>计划达成率</h3>
+                  <div id="planComplete" style="width: 100%;height:190px;"></div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="col-md-3 no_padding"><h2>IT运维</h2></div>
+                <div class="col-md-3"><h4>温度</h4></div>
+                <div class="col-md-3"><h4>湿度</h4></div>
+                <div class="col-md-3"><h4>电压</h4></div>
+              </div>
+              <div class="col-md-12">
+                <div class="col-md-3"><h4>机房环境</h4></div>
+                <div class="col-md-9">
+                  <div id="temperature" style="width: 100%;height:200px;"></div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="col-md-3"><h4>关键资源可用性</h4></div>
+                <div class="col-md-9">
+                  <ul class="nav nav-tabs">
+                    <li class="active" ng-click="clickTab()"><a href="#host">主机</a></li>
+                    <li ng-click="clickTab()"><a href="#database">数据库</a></li>
+                    <li ng-click="clickTab()"><a href="#middleware">中间件</a></li>
+                  </ul>
+                  <div id="resource" style="width: 100%;height:200px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </script>
+  </body>
+  <script src="../js/screen3.js"></script>
+</html>
