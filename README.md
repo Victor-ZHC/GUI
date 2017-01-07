@@ -1,0 +1,2 @@
+# GUI
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c2714eb2d8a04b139252777a0b2b7a0b)](https://www.codacy.com/app/Victor-ZHC/GUI?utm_source=github.com&utm_medium=referral&utm_content=Victor-ZHC/GUI&utm_campaign=badger)
