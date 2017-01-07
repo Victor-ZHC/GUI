@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="60"> <!-- 60秒刷新一次页面-->
     <title>Screen2</title>
     <script src="../js/angular.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
@@ -11,77 +12,49 @@
   <body>
     <div ng-app="myApp" ng-controller="screen2Ctrl" class="main_container">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 title_bottom">
             <h5 class="title_center">银川滨河如意</h5>
             <h1 class="title_center">智能数据运营中心</h1>
           </div>
-          <div class="col-md-12 pinki">
-            <div class="col-md-2">
-	            <span class="pinki_brand">Pinki</span>
-	        </div>
-	        <div class="col-md-2 pink_top">
-	            <span class="pink_title">品依科技</span>
-	            <span class="glyphicon glyphicon-play pink_arrow"></span>
-            </div>
-            <div class="col-md-8 pink_top">
-            	<span class="pinki_info">拥堵节点:自动裁床 拥堵原因: 整改措施: 责任人: 预计恢复时间:</span>
-            </div>
-          </div>
           <div class="col-md-3 right_border_dashed">
             <h2>智能吊挂系统<span class="glyphicon glyphicon-play arrow"></span></h2>
-            <div class="col-md-4 right_border">
-              <span class="productLine_on">{{productLine()[0].split('/')[0]}}</span>
-              <span class="productLine_off">/{{productLine()[0].split('/')[0]}}</span>
+            <div ng-repeat="line in productLine" ng-class="$last ? 'col-md-4' : 'col-md-4 right_border'">
+              <span class="productLine_on" ng-bind="line.using"></span>
+              <span class="productLine_off">/</span>
+              <span class="productLine_off" ng-bind="line.total"></span>
               <br/>
-              <span>产线A</span>
-            </div>
-            <div class="col-md-4 right_border">
-              <span class="productLine_on">{{productLine()[1].split('/')[0]}}</span>
-              <span class="productLine_off">/{{productLine()[1].split('/')[0]}}</span>
-              <br/>
-              <span>产线B</span>
-            </div>
-            <div class="col-md-4">
-              <span class="productLine_on">{{productLine()[2].split('/')[0]}}</span>
-              <span class="productLine_off">/{{productLine()[2].split('/')[0]}}</span>
-              <br/>
-              <span>产线C</span>
+              <span ng-bind="line.name"></span>
             </div>
             <div class="col-md-12 workstation_top">
-              <span class="workstation">工作站暂压: </span><span class="workstation_num">{{workStation()[0]}}</span>
+              <span class="workstation">工作站暂压: </span><span class="workstation_num" ng-if="workStation.overstock!=''" ng-bind="workStation.overstock|number:2"></span>
             </div>
             <div class="col-md-12">
-              <span class="workstation">配对工作站时间效率: </span><span class="workstation_num">{{workStation()[1]}}s</span>
+              <span class="workstation">配对工作站时间效率: </span><span class="workstation_num" ng-if="workStation.peroid!=''" ng-bind="workStation.peroid|number:2"></span><span class="workstation_num">s</span>
             </div>
             <div class="col-md-12">
-              <span class="workstation">暂压的裁片数量: </span><span class="workstation_num">{{workStation()[2]}}</span>
+              <span class="workstation">暂压的裁片数量: </span><span class="workstation_num" ng-if="workStation.cut_parts!=''" ng-bind="workStation.cut_parts|number:2"></span>
             </div>
             <div class="col-md-12">
-              <span class="workstation">服装配对事件: </span><span class="workstation_num">{{workStation()[3]}}s</span>
+              <span class="workstation">服装配对事件: </span><span class="workstation_num" ng-bind="workStation.pair_event"></span>
             </div>
           </div>
           <div class="col-md-3">
             <h2>自动裁床<span class="glyphicon glyphicon-play arrow"></span></h2>
-            <div class="col-md-4 right_border">
-              <span class="brand_on">{{brand()[0].split('/')[0]}}</span>
-              <span class="brand_off">/{{brand()[0].split('/')[1]}}</span>
+            <div ng-repeat="bed in cuttingBed" ng-class="$last ? 'col-md-4' : 'col-md-4 right_border'">
+              <span class="brand_on" ng-bind="bed.using"></span>
+              <span class="brand_off">/</span>
+              <span class="brand_off" ng-bind="bed.total"></span>
               <br/>
-              <span>品牌A</span>
-            </div>
-            <div class="col-md-4">
-              <span class="brand_on">{{brand()[1].split('/')[0]}}</span>
-              <span class="brand_off">/{{brand()[1].split('/')[1]}}</span>
-              <br/>
-              <span>品牌B</span>
+              <span ng-bind="bed.name"></span>
             </div>
             <div class="col-md-12 tailor_top">
-              <span class="tailor">有效工作时间: </span><span class="tailor_num">{{tailor()[0]}}</span>
+              <span class="tailor">有效工作时间: </span><span class="tailor_num" ng-bind="tailor.working_time"></span>
             </div>
             <div class="col-md-12">
-              <span class="tailor">刀头的移动时间: </span><span class="tailor_num">{{tailor()[1]}} %</span>
+              <span class="tailor">刀头的移动时间: </span><span class="tailor_num" ng-bind="tailor.moving_time"></span>
             </div>
             <div class="col-md-12">
-              <span class="tailor">平均裁剪数量: </span><span class="tailor_num">{{tailor()[2]}}</span>
+              <span class="tailor">平均裁剪数量: </span><span class="tailor_num" ng-if="tailor.cutting_num!=''" ng-bind="tailor.cutting_num|number:2"></span>
             </div>
           </div>
           <div class="col-md-3 right_border_dashed">
@@ -96,41 +69,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>小车A</td>
-                  <td>{{avgCar()[0][0]}}</td>
-                  <td>{{avgCar()[0][1]}}''</td>
-                  <td>#{{avgCar()[0][2]}}</td>
-                </tr>
-                <tr>
-                  <td>小车B</td>
-                  <td>{{avgCar()[1][0]}}</td>
-                  <td>{{avgCar()[1][1]}}''</td>
-                  <td>#{{avgCar()[1][2]}}</td>
-                </tr>
-                <tr>
-                  <td>小车C</td>
-                  <td>{{avgCar()[2][0]}}</td>
-                  <td>{{avgCar()[2][1]}}''</td>
-                  <td>#{{avgCar()[2][2]}}</td>
-                </tr>
-                <tr>
-                  <td>小车D</td>
-                  <td>{{avgCar()[3][0]}}</td>
-                  <td>{{avgCar()[3][1]}}''</td>
-                  <td>#{{avgCar()[3][2]}}</td>
-                </tr>
-                <tr>
-                  <td>小车E</td>
-                  <td>{{avgCar()[4][0]}}</td>
-                  <td>{{avgCar()[4][1]}}''</td>
-                  <td>#{{avgCar()[4][2]}}</td>
-                </tr>
-                <tr>
-                  <td>小车F</td>
-                  <td>{{avgCar()[5][0]}}</td>
-                  <td>{{avgCar()[5][1]}}''</td>
-                  <td>#{{avgCar()[5][2]}}</td>
+                <tr ng-repeat="car in avgCar">
+                  <td ng-bind="car.name"></td>
+                  <td ng-bind="car.station"></td>
+                  <td><span ng-bind="car.stay"></span>''</td>
+                  <td>#<span ng-bind="car.shipping_material"></span></td>
                 </tr>
               </tbody>
             </table>
@@ -146,76 +89,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>缝纫机</td>
+                <tr ng-repeat="device in otherDevice">
+                  <td ng-bind="device.type"></td>
                   <td>
-                    <span class="other_device_on">{{otherDevice()[0].split('/')[0]}}</span>
-                    <span class="other_device_off">/{{otherDevice()[0].split('/')[1]}}</span>
+                    <span class="other_device_on" ng-bind="device.onnum"></span>
+                    <span class="other_device_off">/</span>
+                    <span class="other_device_off" ng-bind="device.total"></span>
                   </td>
                   <td>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>熨烫</td>
-                  <td>
-                    <span class="other_device_on">{{otherDevice()[1].split('/')[0]}}</span>
-                    <span class="other_device_off">/{{otherDevice()[1].split('/')[1]}}</span>
-                  </td>
-                  <td>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>熨烫</td>
-                  <td>
-                    <span class="other_device_on">{{otherDevice()[2].split('/')[0]}}</span>
-                    <span class="other_device_off">/{{otherDevice()[2].split('/')[1]}}</span>
-                  </td>
-                  <td>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>熨烫</td>
-                  <td>
-                    <span class="other_device_on">{{otherDevice()[3].split('/')[0]}}</span>
-                    <span class="other_device_off">/{{otherDevice()[3].split('/')[1]}}</span>
-                  </td>
-                  <td>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>熨烫</td>
-                  <td>
-                    <span class="other_device_on">{{otherDevice()[4].split('/')[0]}}</span>
-                    <span class="other_device_off">/{{otherDevice()[4].split('/')[1]}}</span>
-                  </td>
-                  <td>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>熨烫</td>
-                  <td>
-                    <span class="other_device_on">{{otherDevice()[5].split('/')[0]}}</span>
-                    <span class="other_device_off">/{{otherDevice()[5].split('/')[1]}}</span>
-                  </td>
-                  <td>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
-                    <span class="glyphicon glyphicon-ok-circle other_device_state"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state" ng-if="device.normalnum/device.total>=1/3"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state" ng-if="device.normalnum/device.total>=2/3"></span>
+                    <span class="glyphicon glyphicon-ok-circle other_device_state" ng-if="device.normalnum/device.total==1"></span>
                   </td>
                 </tr>
               </tbody>

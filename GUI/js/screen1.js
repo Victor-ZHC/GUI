@@ -1,47 +1,10 @@
 var app = angular.module('myApp', []);
 app.controller('screen1Ctrl', function($scope, $http) {
 
-    $scope.order = {};
     var prefix = "http://139.224.57.175:3000/?header=req&name=";
+    $scope.order = {"todayOrder":"","orderAmount":"",'todaySchedule':'','promptness':''};
+    $scope.customService = {'workSheet':'','online':'','total':''};
 
-	var url=prefix+"t_today_order";
-   	$http.get(url).success(function(response) {
-        $scope.order.todayOrder = JSON.parse(response.data).content; 
-    });
-  	
-  	// $scope.order.todayOrder = 75394;
-    $scope.order.orderAmount = 4378.43;
-    $scope.order.brandTop = {'name':['品牌1','品牌2','品牌3'], 'num':[2342, 1680, 1028]};
-    $scope.order.materialTop = {'name':['面料1','面料2','面料3'], 'num':[2342, 1680, 1028]};
-    $scope.order.customerAreaDist = {'name':['上海','杭州','南京','北京','美国'], 
-                                     'num':[1335,134,254,554,245]};
-
-    $scope.order.schedule = 3649;
-    $scope.order.promptness = '97.6%';
-    $scope.order.emergency = 16;
-    $scope.order.variation = 37;
-    $scope.order.exception = 08;
-
-    $scope.customService = {};
-    $scope.customService.workSheet = 1289;
-    $scope.customService.online = 68;
-    $scope.customService.total = 126;
-    $scope.customService.workSheetProcess = [450, 280, 156];
-    $scope.customService.workSheetContent = {'name':['1','2','3','4','5'], 
-                                     'num':[1335,134,254,554,245]};
-
-	$scope.addCommas = function(data) {  //数字格式处理，加逗号
-		data += '';  
-		var x = data.split('.');  
-		var x1 = x[0];  
-		var x2 = x.length > 1 ? '.' + x[1] : '';  
-		var rgx = /(\d+)(\d{3})/;  
-		while (rgx.test(x1)) {
-			x1 = x1.replace(rgx, '$1' + ',' + '$2');  
-		}  
-		return x1 + x2;
-	}
-	
     var topOption = {
         tooltip : {
             trigger: 'axis',
@@ -50,7 +13,7 @@ app.controller('screen1Ctrl', function($scope, $http) {
             color: 'white',
         },
         grid : {
-            left: '40px',
+            left: '50px',
             top: '10px'
         },
         xAxis : [
@@ -92,35 +55,20 @@ app.controller('screen1Ctrl', function($scope, $http) {
         ]
     };
 
+    var barDataTransfer = function(indexData) {
+        var res = {'name':[],'value':[]};
+        for(var i = 0; i < indexData.length; i++) {
+            res.name.push(indexData[i].name);
+            res.value.push(indexData[i].value);
+        }
+        return res;
+    };
+
     var brandTopChart = echarts.init(document.getElementById('brandTop'));
     brandTopChart.setOption(topOption);
-    brandTopChart.setOption({
-        yAxis : [
-            {
-                data : $scope.order.brandTop.name.reverse()
-            }
-        ],
-        series : [
-            {
-                data : $scope.order.brandTop.num.reverse()
-            }
-        ]
-    });
 
     var materialTopChart = echarts.init(document.getElementById('materialTop'));
     materialTopChart.setOption(topOption);
-    materialTopChart.setOption({
-        yAxis : [
-            {
-                data : $scope.order.materialTop.name.reverse()
-            }
-        ],
-        series : [
-            {
-                data : $scope.order.materialTop.num.reverse()
-            }
-        ]
-    });
 
     var pieOption = {
         tooltip : {
@@ -150,29 +98,17 @@ app.controller('screen1Ctrl', function($scope, $http) {
         ]
     };
 
-    var pieDataTransfer = function(indexData){ //将数据输入转换成饼图需要的格式
-        var res = [];
-        var len = 0;
-        for(var i = 0, size = indexData.name.length;i < size;i++) {
-            res.push({
-                name: indexData.name[i],
-                value: indexData.num[i],
-                selected: true
-            });
+    var pieDataTransfer = function(indexData) {
+        for(var i = 0; i < indexData.length; i++) {
+            indexData[i].selected = true;
         }
-        return res;
+        return indexData;
     }
 
     var customerAreaDistChart = echarts.init(document.getElementById('customerAreaDist'));
     customerAreaDistChart.setOption(pieOption);
-    customerAreaDistChart.setOption({
-        color : ['rgb(93,107,170)','rgb(181,191,240)','rgb(147,161,224)','rgb(200,210,246)','rgb(126,142,205)'],
-        series : [
-            {data: pieDataTransfer($scope.order.customerAreaDist)}
-        ]
-    });
 
-    var workSheetProcessOption = {
+    var workSheetStateOption = {
         tooltip : {
             trigger: 'axis',
         },
@@ -181,7 +117,7 @@ app.controller('screen1Ctrl', function($scope, $http) {
         },
         xAxis: {
             type : 'category',
-            data: ['处理中','未处理','紧急'],
+            data: [],
             axisLine: {
                 lineStyle:{
                     color:'white'
@@ -203,26 +139,7 @@ app.controller('screen1Ctrl', function($scope, $http) {
                 type: 'bar',
                 stack: 'one',
                 barMaxWidth: '40px',
-                data: [
-                    {
-                        value:$scope.customService.workSheetProcess[0],
-                        itemStyle:{
-                            normal:{color:'rgb(128,253,0)'}
-                        }
-                    },
-                    {
-                        value:$scope.customService.workSheetProcess[1],
-                        itemStyle:{
-                            normal:{color:'rgb(200,239,124)'}
-                        }
-                    },
-                    {
-                        value:$scope.customService.workSheetProcess[2],
-                        itemStyle:{
-                            normal:{color:'rgb(255,171,0)'}
-                        }
-                    }
-                ],
+                data: [],
                 label: {
                     normal: {
                         show: true,
@@ -233,26 +150,144 @@ app.controller('screen1Ctrl', function($scope, $http) {
         ]
     };
 
-    var workSheetProcessChart = echarts.init(document.getElementById('workSheetProcess'));
-    workSheetProcessChart.setOption(workSheetProcessOption);
+    var workSheetStateChart = echarts.init(document.getElementById('workSheetState'));
+    workSheetStateChart.setOption(workSheetStateOption);
 
     var workSheetContentChart = echarts.init(document.getElementById('workSheetContent'));
     workSheetContentChart.setOption(pieOption);
-    workSheetContentChart.setOption({
-        color : ['rgb(183,216,137)','rgb(95,136,44)','rgb(125,166,72)','rgb(150,190,84)','rgb(196,222,159)'],
-        series : [
-            {data: pieDataTransfer($scope.customService.workSheetContent)}
-        ]
-    });
 
+    var httpGet = function () {
 
+        $http.get(prefix+'t_today_order').success(function(response) {
+            $scope.order.todayOrder = JSON.parse(response.data).content;
+        });
+        $http.get(prefix+'t_order_amount').success(function(response) {
+            $scope.order.orderAmount = (JSON.parse(response.data).content/10000).toFixed(2); //单位换算成万
+        });
+        $http.get(prefix+'t_today_schedule').success(function(response) {
+            $scope.order.todaySchedule = JSON.parse(response.data).content;
+        });
+        $http.get(prefix+'t_order_promptness').success(function(response) {
+            $scope.order.promptness = (parseFloat(JSON.parse(response.data).content)*100).toFixed(1)+'%';
+        });
+        $http.get(prefix+'t_order_emergency').success(function(response) {
+            $scope.order.emergency = JSON.parse(response.data).content;
+        });
+        $http.get(prefix+'t_order_variation').success(function(response) {
+            $scope.order.variation = JSON.parse(response.data).content;
+        });
+        $http.get(prefix+'t_order_exception').success(function(response) {
+            $scope.order.exception = JSON.parse(response.data).content;
+        });
+
+        $http.get(prefix+'t_customservice_worksheet').success(function(response) {
+            $scope.customService.workSheet = JSON.parse(response.data).content;
+        });
+        $http.get(prefix+'t_customservice_online').success(function(response) {
+            $scope.customService.online = JSON.parse(response.data).content;
+        });
+        $http.get(prefix+'t_customservice_total').success(function(response) {
+            $scope.customService.total = JSON.parse(response.data).content;
+        });
+
+        $http.get(prefix+'t_brand_top').success(function(response) {
+            $scope.order.brandTop = barDataTransfer(JSON.parse(response.data).content);
+            brandTopChart.setOption({
+                yAxis : [
+                    {
+                        data : $scope.order.brandTop.name.reverse()
+                    }
+                ],
+                series : [
+                    {
+                        data : $scope.order.brandTop.value.reverse()
+                    }
+                ]
+            });
+        });
+
+        $http.get(prefix+'t_material_top').success(function(response) {
+            $scope.order.materialTop = barDataTransfer(JSON.parse(response.data).content);
+            materialTopChart.setOption({
+                yAxis : [
+                    {
+                        data : $scope.order.materialTop.name.reverse()
+                    }
+                ],
+                series : [
+                    {
+                        data : $scope.order.materialTop.value.reverse()
+                    }
+                ]
+            });
+        });
+
+        $http.get(prefix+'t_customer_area_dist').success(function(response) {
+            customerAreaDistChart.setOption({
+                color : ['rgb(93,107,170)','rgb(181,191,240)','rgb(147,161,224)','rgb(200,210,246)','rgb(126,142,205)'],
+                series : [
+                    {data: pieDataTransfer(JSON.parse(response.data).content)}
+                ]
+            });;
+        });
+
+        $http.get(prefix+'t_customservice_worksheet_state').success(function(response) {
+            $scope.customService.workSheetState = barDataTransfer(JSON.parse(response.data).content);
+            workSheetStateChart.setOption({
+                xAxis : [
+                    {
+                        data : $scope.customService.workSheetState.name
+                    }
+                ],
+                series : [
+                    {
+                        data : [
+                            {
+                                value:$scope.customService.workSheetState.value[0],
+                                itemStyle:{
+                                    normal:{color:'rgb(128,253,0)'}
+                                }
+                            },
+                            {
+                                value:$scope.customService.workSheetState.value[1],
+                                itemStyle:{
+                                    normal:{color:'rgb(200,239,124)'}
+                                }
+                            },
+                            {
+                                value:$scope.customService.workSheetState.value[2],
+                                itemStyle:{
+                                    normal:{color:'rgb(255,171,0)'}
+                                }
+                            }
+                        ]
+                    }
+                ]
+            });
+        });
+
+        $http.get(prefix+'t_customservice_worksheet_content').success(function(response) {
+            workSheetContentChart.setOption({
+                color : ['rgb(183,216,137)','rgb(95,136,44)','rgb(125,166,72)','rgb(150,190,84)','rgb(196,222,159)'],
+                series : [
+                    {data: pieDataTransfer(JSON.parse(response.data).content)}
+                ]
+            });
+        });
+
+    };
+
+    httpGet();
+    
     /* 使echarts随浏览器缩放 */
     window.onresize = function () {  
         customerAreaDistChart.resize();
         materialTopChart.resize();
         brandTopChart.resize();
-        workSheetProcessChart.resize();
+        workSheetStateChart.resize();
         workSheetContentChart.resize();
     }
+
+    setInterval(httpGet, 2000);
 
 });

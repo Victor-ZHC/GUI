@@ -3,12 +3,11 @@
 	text-align: center;
 }
 
-/*品依科技*/
-.pinki {
-	margin-top: 35px;
-	background:-webkit-gradient(linear, 0% 0%, 100% 0%,from(rgb(16,30,64)), to(#020f2b));
+.title_bottom {
+	margin-bottom: 20px;
 }
 
+/*品依科技*/
 .pinki_brand {
 	font-family: STXingkai;
 	font-size: 45px;
@@ -21,22 +20,8 @@
     font-weight: bold;
 }
 
-.pink_top {
-	padding-top: 18px;
-}
-
 .pink_title {
 	font-size: 20px;
-}
-
-.pink_arrow {
-	font-size: 15px;
-	margin-left: 10px;
-}
-
-.pinki_info {
-	font-size: 20px;
-	color: #ff8300;
 }
 
 /*智能吊挂系统 自动裁床 AVG小车 其他设备*/

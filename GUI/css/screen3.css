@@ -14,11 +14,10 @@
 	color: #99a8f7;
 }
 
-/*右边*/
-/*智能排程APS*/
-.arrow {
-	font-size: 10px;
-	margin-left: 15px;
+.today {
+	font-size: 15px;
+	margin-left: 20px;
+	color: red;
 }
 
 /*质检*/
@@ -34,17 +33,39 @@
 /*问题栈点*/
 .problem_stack {
 	border: 1px solid #fff;
-	border-radius: 15px;  
-	width:90px;
-	height: 90px;
-	margin-right: 10px;
+	border-radius: 25px;  
+	width:150px;
+	height: 150px;
+	margin-right: 20px;
 }
 
+.data {
+	font-size: 30px;
+	margin-top: 30px;
+	font-weight: bolder;
+}
+
+.text-center {
+	text-align: center;
+	color: gray;
+}
+
+.problem {
+	font-size: 15px;
+	margin-left: 20px;
+}
+
+/*右边*/
 /*智能排程APS*/
+.arrow {
+	font-size: 10px;
+	margin-left: 15px;
+}
+
 .semi_circle_up {
-   width: 100px;
-   height: 50px;
-   border-radius: 50px 50px 0 0;
+   width: 84px;
+   height: 42px;
+   border-radius: 42px 42px 0 0;
    background: transparent;
    border: 2px solid #fff;
    border-bottom: none;
@@ -54,9 +75,9 @@
 }
 
 .semi_circle_down {
-   width: 100px;
-   height: 50px;
-   border-radius: 0 0 50px 50px;
+   width: 84px;
+   height: 42px;
+   border-radius: 0 0 42px 42px;
    background: #8ab2ec;
    border: 2px solid #fff;
    border-top: none;
@@ -75,34 +96,14 @@
 	color: #ff5400;
 }
 
+.process_top {
+	margin-top: 30px;
+}
+
 .schedule_bar {
 	color: black;
 	padding-left: 10px;
 	font-weight: bold;
-}
-
-.schedule_a {
-	width: 50%;
-}
-
-.schedule_b {
-	width: 80%;
-}
-
-.schedule_c {
-	width: 63%;
-}
-
-.schedule_d {
-	width: 40%;
-}
-
-.schedule_e {
-	width: 28%;
-}
-
-.schedule_f {
-	width: 10%;
 }
 
 /*供应链*/
